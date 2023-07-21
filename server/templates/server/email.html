@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'server:index' %}">File server</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="{% url 'server:index' %}">Feed</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="text-center mt-4"></div>
+{% if message %}
+<div class="d-flex justify-content-center">
+  <div class="w-25 my-4 bg-success text-white p-4">{{ message }}</div>
+</div>
+{% endif %}
+<div class="d-flex justify-content-center">
+  <div class="card mb-3" style="max-width: 20rem;">
+    <div class="card-header">Send email</div>
+    <div class="card-body">
+      <form method="post" action="{% url 'server:send_email' %}">
+        {% csrf_token %}
+        <fieldset>
+          <div class="form-group">
+            <label for="id" class="form-label mt-4">File</label>
+            <select name="id"  id="id" class="form-control">
+              <option value="{{ file.id }}">{{ file.title }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="receiver" class="form-label mt-4">Email address of receiver</label>
+            <input type="email" class="form-control" id="receiver" name="receiver">
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4">Send</button>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
