@@ -13,8 +13,9 @@
           <a class="nav-link active" href="">Logout</a>
         </li>
       </ul>
-      <form class="d-flex" action="" method="POST">
-        <input class="form-control me-sm-2" type="text" placeholder="Search" name="search">
+      <form class="d-flex" action="{% url 'server:index' %}" method="POST">
+        {% csrf_token %}
+        <input class="form-control me-sm-2" type="text" placeholder="Search by title" name="search">
         <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
