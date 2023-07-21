@@ -1,7 +1,9 @@
+from django.contrib.auth.models import User
 from django.db import models
 
+User._meta.get_field('email')._unique = True
 
-# Create your models here.
+
 class File(models.Model):
     title = models.CharField(max_length=250)
     description = models.TextField()
