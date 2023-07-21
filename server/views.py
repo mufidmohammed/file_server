@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .models import File
 
@@ -11,3 +11,10 @@ def index(request):
     else:
         files = File.objects.all()
     return render(request, "server/feed.html", {"files": files})
+
+
+def preview(request, file_id):
+    file = get_object_or_404(File, pk=file_id)
+    file.previews += 1
+    file.save()
+    return redirect(file.file.url)
