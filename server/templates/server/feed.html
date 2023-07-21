@@ -10,7 +10,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="">Logout</a>
+          <a class="nav-link active" href="{% url 'server:logout' %}">Logout</a>
         </li>
       </ul>
       <form class="d-flex" action="{% url 'server:index' %}" method="POST">

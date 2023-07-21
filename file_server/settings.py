@@ -140,3 +140,6 @@ MEDIA_URL = '/media/'
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
+
+LOGIN_REDIRECT_URL = '/admin'
+LOGIN_URL = '/login'

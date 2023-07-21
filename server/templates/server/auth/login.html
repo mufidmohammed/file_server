@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin-top: 100px;">
+  <div class="d-flex justify-content-center">
+    <div class="w-50">
+      <div class="card mb-3">
+        <div class="card-body">
+          {% if message %}
+          <p class="text-sm text-danger">{{ message }}</p>
+          {% endif %}
+          <form method="post" action="{% url 'server:login' %}">
+            {% csrf_token %}
+            <h3 class="text-center">Login</h3>
+            <fieldset>
+              <div class="form-group my-3">
+                <label for="email" class="form-label">email</label>
+                <input type="email" id="email" name="email" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-control">
+              </div>
+              <div class="form-group mb-3">
+                <button type="submit" class="btn btn-primary mt-4">Login</button>
+              </div>
+            </fieldset>
+          </form>
+          <div class="d-flex justify-content-between">
+            <div>
+              <div>
+                Don't have an account? <a href="{% url 'server:register' %}">register</a>
+              </div>
+              <div>
+                Forgot password? <a href="{% url 'password_reset' %}">reset</a>
+              </div>
+            </div>
+            <div>
+              <a href="{% url 'admin:login' %}" style="text-decoration: none">admin login</a>
+            </div>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+{% endblock %}
