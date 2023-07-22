@@ -1,11 +1,10 @@
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import check_password
-from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import File
+from .models import File, User
 
 from .forms import CreateUserForm
 
@@ -76,9 +75,8 @@ def user_login(request):
     if request.method == "POST":
         email = request.POST["email"]
         password = request.POST["password"]
-        user = User.objects.get(email=email)
-        valid_user = check_password(password, user.password)
-        if valid_user:
+        user = authenticate(username=email, password=password)
+        if user:
             login(request, user)
             return redirect("server:index")
         message = "Email and password do not match any user. Please try again"

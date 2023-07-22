@@ -132,7 +132,7 @@ JAZZMIN_SETTINGS = {
     'site_logo': None,
     'login_logo': None,
     'welcome_sign': 'Admin Login',
-    'hide_apps': ['auth'],
+    'hide_apps': [],
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -142,4 +142,6 @@ EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
 LOGIN_REDIRECT_URL = '/admin'
-LOGIN_URL = '/login'
+LOGIN_URL = 'login/'
+
+AUTH_USER_MODEL = 'server.User'
