@@ -132,7 +132,7 @@ JAZZMIN_SETTINGS = {
     'site_logo': None,
     'login_logo': None,
     'welcome_sign': 'Admin Login',
-    'hide_apps': [],
+    'hide_apps': ['auth'],
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
