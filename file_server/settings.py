@@ -142,7 +142,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp-relay.brevo.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'mufidmohammed200@gmail.com'
-EMAIL_HOST_PASSWORD = 'xsmtpsib-8da9faca1b334f2bc2c88d8d41c4f953b4b11bcddb32f1097a0736f47f4d9247-JxQIzsNLbAtZ19Rr'
+EMAIL_HOST_PASSWORD = 'xsmtpsib-8da9faca1b334f2bc2c88d8d41c4f953b4b11bcddb32f1097a0736f47f4d9247-8TSZj0bKD3RdhpqG'
 
 LOGIN_REDIRECT_URL = '/admin'
 LOGIN_URL = 'login/'
