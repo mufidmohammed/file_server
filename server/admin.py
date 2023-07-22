@@ -1,6 +1,5 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import File, User
+from .models import File
 
 
 # Register your models here.
@@ -12,5 +11,4 @@ class FileAdmin(admin.ModelAdmin):
     list_display = ["title", "previews", "emails_sent"]
 
 
-admin.site.register(User, UserAdmin)
 admin.site.register(File, FileAdmin)

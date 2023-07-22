@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4873j^e_&5loj3h3&w2j2ieiam(20g&s(pxf#74^mh*dlg3d!^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -116,7 +116,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -139,8 +139,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
+EMAIL_HOST = 'smtp-relay.brevo.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'mufidmohammed200@gmail.com'
+EMAIL_HOST_PASSWORD = 'xsmtpsib-8da9faca1b334f2bc2c88d8d41c4f953b4b11bcddb32f1097a0736f47f4d9247-JxQIzsNLbAtZ19Rr'
 
 LOGIN_REDIRECT_URL = '/admin'
 LOGIN_URL = 'login/'
