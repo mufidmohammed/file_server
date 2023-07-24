@@ -49,13 +49,15 @@ def send_email(request):
     file = file_object.file
 
     email.attach_file(file.path)
-    email.send()
+    try:
+        email.send()
+        # increment emails_sent for the file model
+        file_object.emails_sent += 1
+        file_object.save()
+        message = "File emailed successfully"
+    except ConnectionRefusedError:
+        message = "File emailing not configured to work in production. Please test locally"
 
-    # increment emails_sent for the file model
-    file_object.emails_sent += 1
-    file_object.save()
-
-    message = "File emailed successfully"
     return redirect(f"{request.META['HTTP_REFERER']}?message={message}")
 
 
