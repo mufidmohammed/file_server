@@ -1,10 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.hashers import check_password
 from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .models import File, User
+from .models import File
 
 from .forms import CreateUserForm
 
