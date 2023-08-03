@@ -2,6 +2,7 @@ import os
 
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
@@ -85,6 +86,7 @@ def register(request):
         if form.is_valid():
             form.save()
 
+            # send confirmation email upon signup
             username = form.cleaned_data.get("username")
             email = [form.cleaned_data.get("email")]
             data = {
@@ -103,12 +105,13 @@ def register(request):
 
 def user_login(request):
     if request.method == "POST":
-        email = request.POST["email"]
+        email = request.POST["username"]
         password = request.POST["password"]
         user = authenticate(username=email, password=password)
         if user:
             login(request, user)
             
+            # send confirmation email after login
             username = user.username
             to_email = [email]
 
@@ -120,11 +123,14 @@ def user_login(request):
             send_confirmation_email(username, "account login", to_email, data)
 
             return redirect("server:index")
+        
         message = "Email and password do not match any user. Please try again"
+        form = AuthenticationForm(request.POST)
     else:
         message = ""
+        form = AuthenticationForm()
 
-    return render(request, "server/auth/login.html", {"message": message})
+    return render(request, "server/auth/login.html", {"message": message, "form": form})
 
 
 def send_confirmation_email(username, subject, to_email, data):

@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block content %}
 <div style="margin-top: 100px;">
   <div class="d-flex justify-content-center">
@@ -16,14 +18,9 @@
             {% csrf_token %}
             <h3 class="text-center">Login</h3>
             <fieldset>
-              <div class="form-group my-3">
-                <label for="email" class="form-label">email</label>
-                <input type="email" id="email" name="email" class="form-control">
-              </div>
-              <div class="form-group mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" name="password" class="form-control">
-              </div>
+
+              {{ form|crispy }}
+              
               <div class="form-group mb-3">
                 <button type="submit" class="btn btn-primary mt-4">Login</button>
               </div>
