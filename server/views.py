@@ -86,7 +86,11 @@ def send_confirmation_email(username, subject, to_email, data):
     html_content = htmly.render(data)
     email = EmailMessage(subject, html_content, from_email, to_email)
     email.content_subtype = "html"
-    email.send()
+    try:
+        email.send()
+    except ConnectionRefusedError:
+        pass    # production environment
+        
 
 
 def register(request):
