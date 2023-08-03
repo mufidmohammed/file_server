@@ -126,7 +126,7 @@ def user_login(request):
 
             data = {
                 "title": "Account Login",
-                "message": f"Hello {username}, Your account has been logged in recently. If this is not you, kindly reset your password"
+                "message": f"Hello {username}, Your account has been logged in recently. If it was not you, kindly reset your password"
             }
 
             send_confirmation_email(username, "account login", to_email, data)
