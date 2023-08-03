@@ -28,9 +28,6 @@ def index(request):
 def download(request, file_id):
     file = get_object_or_404(File, pk=file_id)
     
-    file.downloads += 1
-    file.save()
-    
     file_path = file.file.path
 
     file_name = os.path.basename(file_path)
