@@ -1,4 +1,3 @@
 media/
 *.pyc
 todos.txt
-db.sqlite3
