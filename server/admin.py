@@ -8,7 +8,7 @@ class FileAdmin(admin.ModelAdmin):
         "title", "description", "file"
     ]
 
-    list_display = ["title", "previews", "emails_sent"]
+    list_display = ["title", "downloads", "emails_sent"]
 
 
 admin.site.register(File, FileAdmin)

@@ -1,7 +1,11 @@
+import os
+
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
+from django.conf import settings
+from django.http import FileResponse
 
 from .models import File
 
@@ -17,12 +21,26 @@ def index(request):
         files = File.objects.all()
     return render(request, "server/feed.html", {"files": files})
 
+
 @login_required
-def preview(request, file_id):
+def download(request, file_id):
     file = get_object_or_404(File, pk=file_id)
-    file.previews += 1
+    
+    file.downloads += 1
     file.save()
-    return redirect(file.file.url)
+    
+    file_path = file.file.path
+
+    file_name = os.path.basename(file_path)
+
+    response = FileResponse(open(file_path, "rb"), content_type="application/octet-stream")
+    response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+
+    file.downloads += 1
+    file.save()
+
+    return response
+
 
 @login_required
 def create_email(request, file_id):

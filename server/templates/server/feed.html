@@ -44,8 +44,9 @@
         <td>{{ file.description }}</td>
         <td>
           <div class="d-flex">
-            <div class="mx-1"><a href="{% url 'server:preview' file.id %}" target="_blank" class="btn btn-info">preview</a></div>
+            <div class="mx-1"><a href="{{ file.file.url }}" target="_blank" class="btn btn-info">preview</a></div>
             <div class="mx-1"><a href="{% url 'server:create_email' file.id %}" class="btn btn-info">send as email</a></div>
+            <div class="mx-1"><a href="{% url 'server:download' file.id %}" class="btn btn-info">download</a></div>
           </div>
         </td>
       </tr>
