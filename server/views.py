@@ -1,6 +1,6 @@
 import os
 
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.core.mail import EmailMessage
@@ -80,6 +80,15 @@ def send_email(request):
     return redirect(f"{request.META['HTTP_REFERER']}?message={message}")
 
 
+def send_confirmation_email(username, subject, to_email, data):
+    from_email = "test@email.com"
+    htmly = get_template("server/auth/confirmation_email.html")
+    html_content = htmly.render(data)
+    email = EmailMessage(subject, html_content, from_email, to_email)
+    email.content_subtype = "html"
+    email.send()
+
+
 def register(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
@@ -133,10 +142,6 @@ def user_login(request):
     return render(request, "server/auth/login.html", {"message": message, "form": form})
 
 
-def send_confirmation_email(username, subject, to_email, data):
-    from_email = "test@email.com"
-    htmly = get_template("server/auth/confirmation_email.html")
-    html_content = htmly.render(data)
-    email = EmailMessage(subject, html_content, from_email, to_email)
-    email.content_subtype = "html"
-    email.send()
+def user_logout(request):
+    logout(request)
+    return redirect("server:login")

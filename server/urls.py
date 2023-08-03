@@ -11,5 +11,5 @@ urlpatterns = [
     path("email/", views.send_email, name="send_email"),
     path("register/", views.register, name='register'),
     path("login/", views.user_login, name="login"),
-    path("logout/", auth_view.LogoutView.as_view(template_name="server/auth/login.html"), name="logout"),
+    path("logout/", views.user_logout, name="logout")
 ]
