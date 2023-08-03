@@ -6,6 +6,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.conf import settings
 from django.http import FileResponse
+from django.template.loader import get_template
 
 from .models import File
 
@@ -83,6 +84,16 @@ def register(request):
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
+
+            username = form.cleaned_data.get("username")
+            email = [form.cleaned_data.get("email")]
+            data = {
+                "title": "Signup successful", 
+                "message": f"Congratulations {username}. Your account has been created successfully"
+            }
+
+            send_confirmation_email(username, "account creation", email, data)
+
             return redirect("server:login")
     else:
         form = CreateUserForm()
@@ -97,9 +108,29 @@ def user_login(request):
         user = authenticate(username=email, password=password)
         if user:
             login(request, user)
+            
+            username = user.username
+            to_email = [email]
+
+            data = {
+                "title": "Account Login",
+                "message": f"Hello {username}, Your account has been logged in recently. If this is not you, kindly reset your password"
+            }
+
+            send_confirmation_email(username, "account login", to_email, data)
+
             return redirect("server:index")
         message = "Email and password do not match any user. Please try again"
     else:
         message = ""
 
     return render(request, "server/auth/login.html", {"message": message})
+
+
+def send_confirmation_email(username, subject, to_email, data):
+    from_email = "test@email.com"
+    htmly = get_template("server/auth/confirmation_email.html")
+    html_content = htmly.render(data)
+    email = EmailMessage(subject, html_content, from_email, to_email)
+    email.content_subtype = "html"
+    email.send()
