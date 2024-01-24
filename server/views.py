@@ -72,7 +72,7 @@ def send_email(request):
         file_object.save()
         message = "File emailed successfully"
     except ConnectionRefusedError:
-        message = "File emailing not configured to work in production. Please test locally"
+        message = "File emailing not configured to work in production. You can test locally with Mailhog"
 
     return redirect(f"{request.META['HTTP_REFERER']}?message={message}")
 
