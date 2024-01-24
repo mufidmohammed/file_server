@@ -1,6 +1,6 @@
 # Multi-file Sharing Platform
 
-This project is designed to serve as a platform for distributing multiple files, by allowing users to download and transmit files through email.
+This project is designed to serve as a platform for distributing multiple files, by allowing users to download, and transmit files through email.
 
 ## Requirements
 * Python 3.9 and above
